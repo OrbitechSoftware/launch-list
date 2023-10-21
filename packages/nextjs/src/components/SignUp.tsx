@@ -45,13 +45,13 @@ export default function SignUp() {
 
   if (!apiKey) {
     throw new Error(
-      "LaunchList API key was not found. Make sure you have NEXT_PUBLIC_API_KEY set."
+      "LaunchList API key was not found. Make sure you have NEXT_PUBLIC_LAUNCH_LIST_API_KEY set."
     );
   }
 
   if (!projectId) {
     throw new Error(
-      "LaunchList project was not found. Make sure you have NEXT_PUBLIC_PROJECT_ID set."
+      "LaunchList project was not found. Make sure you have NEXT_PUBLIC_LAUNCH_LIST_PROJECT_ID set."
     );
   }
 

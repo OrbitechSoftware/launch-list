@@ -31,8 +31,8 @@ function Shell({ children }: { children: React.ReactNode }) {
 }
 
 export default function SignUp() {
-  const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
-  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+  const projectId = process.env.NEXT_PUBLIC_LAUNCH_LIST_PROJECT_ID;
+  const apiKey = process.env.NEXT_PUBLIC_LAUNCH_LIST_API_KEY;
 
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);

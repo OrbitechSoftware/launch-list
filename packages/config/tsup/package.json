@@ -1,0 +1,11 @@
+{
+	"name": "@launch-list/tsup",
+	"version": "0.1.0",
+	"private": true,
+	"main": "index.js",
+	"types": "index.d.ts",
+	"devDependencies": {
+		"@types/node": "20.5.1",
+		"tsup": "^7.2.0"
+	}
+}

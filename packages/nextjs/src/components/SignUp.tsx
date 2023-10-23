@@ -9,7 +9,7 @@ export const signUpSchema = z.object({
 export type SignUpFormFields = z.infer<typeof signUpSchema>;
 
 // TODO: Centralize
-const apiUrl = "https://launchlist.app/api/v1/projects";
+const apiUrl = "https://www.launchlist.app/api/v1/projects";
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
@@ -18,7 +18,7 @@ function Shell({ children }: { children: React.ReactNode }) {
       <p className="text-center mt-6 text-xs text-gray-600 italic">
         Powered by{" "}
         <a
-          href="https://launchlist.app"
+          href="https://www.launchlist.app"
           rel="noreferrer"
           target="_blank"
           className="font-semibold hover:underline not-italic"

@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.ll-container {
+		@apply w-full my-6 bg-white p-6 rounded-md shadow;
+	}
+
+	.ll-button {
+		@apply bg-orange-600 font-semibold leading-6 text-white shadow-sm px-3 py-2 rounded-md disabled:bg-orange-300 text-sm;
+	}
+
+	.ll-input {
+		@apply border shadow-sm px-3 py-2 rounded-md block text-gray-800;
+	}
+}

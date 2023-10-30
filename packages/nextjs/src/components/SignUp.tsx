@@ -1,9 +1,14 @@
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const signUpSchema = z.object({
-  email: z.string().email(),
+  email: z
+    .string()
+    .min(1, { message: "Email is required." })
+    .email("This email address is not valid."),
 });
 
 export type SignUpFormFields = z.infer<typeof signUpSchema>;
@@ -11,9 +16,20 @@ export type SignUpFormFields = z.infer<typeof signUpSchema>;
 // TODO: Centralize
 const apiUrl = "https://www.launchlist.app/api/v1/projects";
 
-function Shell({ children }: { children: React.ReactNode }) {
+function FormWrapper({
+  children,
+  appearance,
+}: {
+  children: React.ReactNode;
+  appearance?: string;
+}) {
   return (
-    <div className="w-full my-6 bg-white p-6 rounded-md shadow">
+    <div
+      data-testid="ll-signUpForm"
+      className={twMerge(
+        appearance ? appearance : "w-full my-6 bg-white p-6 rounded-md shadow"
+      )}
+    >
       {children}
       <p className="text-center mt-6 text-xs text-gray-600 italic">
         Powered by{" "}
@@ -30,7 +46,15 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function SignUp() {
+type Props = {
+  appearance?: {
+    container?: string;
+    button?: string;
+    input?: string;
+  };
+};
+
+export function SignUp(props: Props) {
   const projectId = process.env.NEXT_PUBLIC_LAUNCH_LIST_PROJECT_ID;
   const apiKey = process.env.NEXT_PUBLIC_LAUNCH_LIST_API_KEY;
 
@@ -41,6 +65,7 @@ export default function SignUp() {
     defaultValues: {
       email: "",
     },
+    resolver: zodResolver(signUpSchema),
   });
 
   if (!apiKey) {
@@ -85,19 +110,19 @@ export default function SignUp() {
 
   if (submitted) {
     return (
-      <Shell>
+      <FormWrapper appearance={props.appearance?.container}>
         <p className="text-center text-green-600 text-sm">
           <span className="font-semibold">You&apos;re on the list! </span>
           <br />
           Thanks for signing up! Be sure to keep an eye on your email for any
           updates.
         </p>
-      </Shell>
+      </FormWrapper>
     );
   }
 
   return (
-    <Shell>
+    <FormWrapper appearance={props.appearance?.container}>
       <form onSubmit={form.handleSubmit(handleSignUpSubmit)}>
         {error && (
           <p className="text-sm text-red-600 mb-2 text-center">
@@ -113,13 +138,25 @@ export default function SignUp() {
           <input
             id="emailAddress"
             type="email"
-            className="border shadow-sm px-3 py-2 rounded-md block text-gray-800"
+            className={twMerge(
+              props.appearance?.input
+                ? props.appearance?.input
+                : "border shadow-sm px-3 py-2 rounded-md block text-gray-800"
+            )}
             {...form.register("email")}
           />
+          {form.formState.errors.email ? (
+            <p className="text-sm text-red-600">
+              {form.formState.errors.email.message}
+            </p>
+          ) : null}
           <button
             type="submit"
-            className="bg-orange-600 font-semibold leading-6 text-white shadow-sm px-3 py-2 rounded-md disabled:bg-orange-300 text-sm"
-            disabled={
+            className={twMerge(
+              "bg-orange-600 font-semibold leading-6 text-white shadow-sm px-3 py-2 rounded-md text-sm",
+              props.appearance?.button
+            )}
+            aria-disabled={
               form.formState.isSubmitting ||
               !form.formState.isValid ||
               !form.formState.isDirty
@@ -129,6 +166,6 @@ export default function SignUp() {
           </button>
         </div>
       </form>
-    </Shell>
+    </FormWrapper>
   );
 }

@@ -15,7 +15,8 @@
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "module": "ES2022"
   },
   "include": ["src/**/*", "*.ts", "test"],
   "exclude": ["node_modules"]

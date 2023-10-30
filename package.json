@@ -4,10 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"dev": "FORCE_COLOR=1 turbo dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "FORCE_COLOR=1 turbo dev",
+    "test": "turbo test",
+		"build": "turbo build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
+    "jsdom": "^22.1.0",
+    "typescript": "5.1.6",
+    "vitest": "^0.34.6",
+    "vitest-dom": "^0.1.1"
+  }
 }

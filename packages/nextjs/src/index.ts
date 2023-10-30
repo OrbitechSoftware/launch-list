@@ -1,1 +1,3 @@
-export { SignUp } from "./components";
+import "./style.css";
+
+export { SignUp } from "./components/SignUp";
